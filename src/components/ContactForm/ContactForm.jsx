@@ -1,15 +1,45 @@
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from '../../redux/action';
+
+import { v4 as uuidv4 } from 'uuid';
+import toast from 'react-hot-toast';
 
 import { Form, Label, Input, LabelName, AddButton } from './ContactForm.styled';
 
-export default function ContactForm({ onSubmit }) {
+export default function ContactForm() {
+  const contacts = useSelector(state => state.contacts.items);
+  const dispatch = useDispatch();
+
   const handleSubmit = e => {
     e.preventDefault();
     const name = e.target.name.value;
     const number = e.target.number.value;
 
-    onSubmit(name, number);
+    if (nameVerification(name)) {
+      toast.error(`${name} is already in contacts`, {
+        style: {
+          border: '1px solid #713200',
+          padding: '16px',
+          color: '#713200',
+        },
+        iconTheme: {
+          primary: '#713200',
+          secondary: '#FFFAEE',
+        },
+      });
+      return;
+    }
+    const newContact = {
+      id: uuidv4(),
+      name,
+      number,
+    };
+    dispatch(addContact(newContact));
     reset(e);
+  };
+
+  const nameVerification = name => {
+    return contacts.find(contact => name === contact.name);
   };
 
   const reset = e => {
@@ -43,7 +73,3 @@ export default function ContactForm({ onSubmit }) {
     </Form>
   );
 }
-
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
