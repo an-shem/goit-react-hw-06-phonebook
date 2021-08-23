@@ -16,6 +16,7 @@
     "react-hot-toast": "^2.1.0",
     "react-redux": "^7.2.4",
     "react-scripts": "4.0.3",
+    "redux-persist": "^6.0.0",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.2"
   },
