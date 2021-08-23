@@ -11,7 +11,8 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import contacts from './reducer.js';
+import items from './slice-items';
+import filter from './slice-filter';
 
 const persistConfig = {
   key: 'contacts',
@@ -24,6 +25,11 @@ const rootPersistConfig = {
   storage,
   blacklist: ['contacts'],
 };
+
+const contacts = combineReducers({
+  items,
+  filter,
+});
 
 const rootReducer = combineReducers({
   contacts: persistReducer(persistConfig, contacts),

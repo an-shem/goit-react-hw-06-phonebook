@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../../redux/action';
+import { addContact } from '../../redux/slice-items';
 
 import { v4 as uuidv4 } from 'uuid';
 import toast from 'react-hot-toast';
