@@ -16,6 +16,4 @@ const contacts = combineReducers({
   filter,
 });
 
-// const rootReducer = combineReducers({ contacts });
-
 export default contacts;
